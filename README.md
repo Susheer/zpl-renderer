@@ -1,10 +1,8 @@
 ## Acknowledgements
 
-This project builds upon the excellent work of the BinaryKits project, particularly:
+The managed rendering engine is built upon the excellent work of the
+BinaryKits.Zpl project.
 
-- BinaryKits.Zpl.Label
-- BinaryKits.Zpl.Viewer
-
-The managed rendering engine is derived from and extends these projects while adding additional packaging, APIs, and platform integrations for broader use cases.
-
-We are grateful to the BinaryKits contributors for making their work available as open source.
+This project extends the original implementation with additional packaging,
+architecture, APIs, and future platform integrations while preserving the
+original MIT license and attribution for the incorporated code.

@@ -4,9 +4,7 @@ Copyright © 2026 Sudheer Gupta
 
 Licensed under the Apache License, Version 2.0.
 
-This project incorporates and builds upon components from the BinaryKits project,
-including BinaryKits.Zpl.Label and BinaryKits.Zpl.Viewer, in accordance with
-their respective licenses.
+This project incorporates and extends portions of the BinaryKits.Zpl project,
+which is licensed under the MIT License.
 
-Additional modifications, integrations, and packaging are Copyright © 2026
-Sudheer Gupta.
+See THIRD_PARTY_NOTICES.md for attribution and license details.
