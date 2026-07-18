@@ -1,4 +1,5 @@
-﻿using ZplRenderer.Core;
+﻿using System.IO;
+using ZplRenderer.Core;
 
 string zpl =
 """
@@ -9,8 +10,11 @@ string zpl =
 ^XZ
 """;
 
-Console.WriteLine("Parsing...");
+Console.WriteLine("Rendering...");
 
-string json = Parser.Analyze(zpl);
+var png = Renderer.RenderPng(zpl);
 
-Console.WriteLine(json);
+File.WriteAllBytes("label.png", png);
+
+Console.WriteLine($"Generated {png.Length} bytes");
+Console.WriteLine("Saved label.png");
