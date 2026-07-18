@@ -14,13 +14,12 @@ public static class Exports
     [UnmanagedCallersOnly(EntryPoint = "GetVersion")]
     public static IntPtr GetVersion()
     {
-        return Marshal.StringToCoTaskMemUTF8("0.1.0");
+        return Memory.AllocUtf8("0.1.0");
     }
 
     [UnmanagedCallersOnly(EntryPoint = "FreeMemory")]
     public static void FreeMemory(IntPtr ptr)
     {
-        if (ptr != IntPtr.Zero)
-            Marshal.FreeCoTaskMem(ptr);
+        Memory.Free(ptr);
     }
 }
