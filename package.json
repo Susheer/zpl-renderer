@@ -1,8 +1,27 @@
 {
-    "name": "@thesusheer/zpl-renderer",
-    "version": "0.1.0",
-    "main": "js/index.js",
-    "scripts": {
-        "build:core":"dotnet build managed\\ZplRenderer.Core\\ZplRenderer.Core.csproj"
-    }
+  "name": "@thesusheer/zpl-renderer",
+  "description": "Native ZPL parser and PNG renderer for Node.js and Electron",
+  "version": "0.1.0",
+  "main": "./lib/index.js",
+  "types": "./types/index.d.ts",
+
+  "dependencies": {
+    "node-addon-api": "^8.1.0",
+    "prebuild-install": "^7.1.3"
+  },
+
+  "scripts": {
+    "build:core": "dotnet build managed/ZplRenderer.Core/ZplRenderer.Core.csproj",
+    "publish:core": "dotnet publish managed/ZplRenderer.Core/ZplRenderer.Core.csproj -c Release",
+    "rebuild": "node-gyp rebuild",
+    "test": "node --test test/"
+  },
+
+  "files": [
+    "lib/**/*",
+    "js/**/*",
+    "types/**/*",
+    "README.md",
+    "LICENSE"
+  ]
 }

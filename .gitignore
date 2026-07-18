@@ -1,2 +1,4 @@
 /managed/**/bin/
 /managed/**/obj/
+build/
+node_modules/
