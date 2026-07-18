@@ -14,7 +14,17 @@ public static class Exports
     [UnmanagedCallersOnly(EntryPoint = "GetVersion")]
     public static IntPtr GetVersion()
     {
-        return Memory.AllocUtf8("0.1.0");
+        return Memory.AllocString("0.2.0");
+    }
+
+    [UnmanagedCallersOnly(EntryPoint = "Parse")]
+    public static IntPtr Parse(IntPtr utf8)
+    {
+        var zpl = Marshal.PtrToStringUTF8(utf8) ?? string.Empty;
+
+        var json = Parser.Analyze(zpl);
+
+        return Memory.AllocString(json);
     }
 
     [UnmanagedCallersOnly(EntryPoint = "FreeMemory")]

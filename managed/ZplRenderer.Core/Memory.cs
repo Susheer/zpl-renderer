@@ -6,12 +6,12 @@ namespace ZplRenderer.Core;
 
 internal static class Memory
 {
-    public static IntPtr AllocUtf8(string text)
+    internal static IntPtr AllocString(string value)
     {
-        if (text == null)
+        if (string.IsNullOrEmpty(value))
             return IntPtr.Zero;
 
-        byte[] bytes = Encoding.UTF8.GetBytes(text + '\0');
+        byte[] bytes = Encoding.UTF8.GetBytes(value + '\0');
 
         IntPtr ptr = Marshal.AllocCoTaskMem(bytes.Length);
 
@@ -20,9 +20,11 @@ internal static class Memory
         return ptr;
     }
 
-    public static void Free(IntPtr ptr)
+    internal static void Free(IntPtr ptr)
     {
         if (ptr != IntPtr.Zero)
+        {
             Marshal.FreeCoTaskMem(ptr);
+        }
     }
 }
