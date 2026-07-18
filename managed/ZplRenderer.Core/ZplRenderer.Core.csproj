@@ -5,19 +5,10 @@
 
     <OutputType>Library</OutputType>
 
-    <PublishAot>true</PublishAot>
-    <SelfContained>true</SelfContained>
-
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-
-    <StripSymbols>true</StripSymbols>
-
-    <InvariantGlobalization>true</InvariantGlobalization>
-
-    <OptimizationPreference>Speed</OptimizationPreference>
   </PropertyGroup>
 
   <ItemGroup>

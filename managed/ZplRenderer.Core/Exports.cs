@@ -21,8 +21,6 @@ public static class Exports
     public static void FreeMemory(IntPtr ptr)
     {
         if (ptr != IntPtr.Zero)
-        {
             Marshal.FreeCoTaskMem(ptr);
-        }
     }
 }
