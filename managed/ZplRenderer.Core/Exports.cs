@@ -27,6 +27,20 @@ public static class Exports
         return Memory.AllocString(json);
     }
 
+    [UnmanagedCallersOnly(EntryPoint = "RenderPng")]
+    public static unsafe IntPtr RenderPng(
+        IntPtr utf8,
+        int* length)
+    {
+        var zpl = Marshal.PtrToStringUTF8(utf8) ?? string.Empty;
+
+        var png = Renderer.RenderPng(zpl);
+
+        *length = png.Length;
+
+        return Memory.AllocBytes(png);
+    }
+
     [UnmanagedCallersOnly(EntryPoint = "FreeMemory")]
     public static void FreeMemory(IntPtr ptr)
     {

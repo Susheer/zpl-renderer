@@ -20,6 +20,18 @@ internal static class Memory
         return ptr;
     }
 
+    internal static IntPtr AllocBytes(byte[] bytes)
+    {
+        if (bytes == null || bytes.Length == 0)
+            return IntPtr.Zero;
+
+        IntPtr ptr = Marshal.AllocCoTaskMem(bytes.Length);
+
+        Marshal.Copy(bytes, 0, ptr, bytes.Length);
+
+        return ptr;
+    }
+
     internal static void Free(IntPtr ptr)
     {
         if (ptr != IntPtr.Zero)

@@ -9,6 +9,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <!-- NativeAOT -->
+    <PublishAot>true</PublishAot>
+    <NativeLib>Shared</NativeLib>
+    <SelfContained>true</SelfContained>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <StripSymbols>false</StripSymbols>
   </PropertyGroup>
 
   <ItemGroup>

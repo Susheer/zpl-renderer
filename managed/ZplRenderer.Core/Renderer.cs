@@ -8,17 +8,13 @@ public static class Renderer
     {
         var printerStorage = new PrinterStorage();
 
-        var analyzer = new ZplAnalyzer(printerStorage);
-
-        var result = analyzer.Analyze(zpl);
+        var result = Parser.Parse(zpl, printerStorage);
 
         if (result.LabelInfos.Length == 0)
             throw new InvalidOperationException("No labels found.");
 
         var drawer = new ZplElementDrawer(printerStorage);
 
-        return drawer.Draw(
-            result.LabelInfos[0].ZplElements
-        );
+        return drawer.Draw(result.LabelInfos[0].ZplElements);
     }
 }

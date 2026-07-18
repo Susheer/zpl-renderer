@@ -1,22 +1,35 @@
 using BinaryKits.Zpl.Viewer;
+using BinaryKits.Zpl.Viewer.Models;
 using System.Text.Json;
 
 namespace ZplRenderer.Core;
 
 public static class Parser
 {
-    public static string Analyze(string zpl)
+    public static AnalyzeInfo Parse(string zpl)
     {
-        var printerStorage = new PrinterStorage();
+        return Parse(zpl, new PrinterStorage());
+    }
 
+    internal static AnalyzeInfo Parse(
+        string zpl,
+        PrinterStorage printerStorage)
+    {
         var analyzer = new ZplAnalyzer(printerStorage);
 
-        var result = analyzer.Analyze(zpl);
+        return analyzer.Analyze(zpl);
+    }
 
-        return JsonSerializer.Serialize(result, new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        });
+    public static string Analyze(string zpl)
+    {
+        var result = Parse(zpl);
+
+        return JsonSerializer.Serialize(
+            result,
+            new JsonSerializerOptions
+            {
+                WriteIndented = true,
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
     }
 }
