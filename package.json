@@ -1,5 +1,8 @@
 {
     "name": "@thesusheer/zpl-renderer",
     "version": "0.1.0",
-    "main": "js/index.js"
+    "main": "js/index.js",
+    "scripts": {
+        "build:core":"dotnet build managed\\ZplRenderer.Core\\ZplRenderer.Core.csproj"
+    }
 }
