@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+
+    <OutputType>Library</OutputType>
+
+    <PublishAot>true</PublishAot>
+    <SelfContained>true</SelfContained>
+
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <StripSymbols>true</StripSymbols>
+
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+    <OptimizationPreference>Speed</OptimizationPreference>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BinaryKits.Zpl.Label\BinaryKits.Zpl.Label.csproj" />
+    <ProjectReference Include="..\BinaryKits.Zpl.Viewer\BinaryKits.Zpl.Viewer.csproj" />
+  </ItemGroup>
+
+</Project>
