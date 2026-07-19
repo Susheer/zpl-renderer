@@ -2,9 +2,12 @@
   "name": "@thesusheer/zpl-renderer",
   "description": "Native ZPL parser and PNG renderer for Node.js and Electron",
   "version": "0.3.0",
-  "main": "./lib/index.js",
+  "main": "index.js",
   "types": "./types/index.d.ts",
-
+  "files": [
+    "index.js",
+    "lib/**/*"
+  ],
   "dependencies": {
     "node-addon-api": "^8.1.0",
     "prebuild-install": "^7.1.3"
