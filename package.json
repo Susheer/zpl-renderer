@@ -1,7 +1,7 @@
 {
   "name": "@thesusheer/zpl-renderer",
   "description": "Native ZPL parser and PNG renderer for Node.js and Electron",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "main": "./lib/index.js",
   "types": "./types/index.d.ts",
 
