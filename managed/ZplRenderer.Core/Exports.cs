@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 
 namespace ZplRenderer.Core;
 
@@ -28,13 +29,14 @@ public static class Exports
     }
 
     [UnmanagedCallersOnly(EntryPoint = "RenderPng")]
-    public static unsafe IntPtr RenderPng(
-        IntPtr utf8,
-        int* length)
+    public static unsafe IntPtr RenderPng(IntPtr zplPtr, IntPtr optionsPtr, int* length)
     {
-        var zpl = Marshal.PtrToStringUTF8(utf8) ?? string.Empty;
-
-        var png = Renderer.RenderPng(zpl);
+        var zpl = Marshal.PtrToStringUTF8(zplPtr) ?? string.Empty;
+        var json = Marshal.PtrToStringUTF8(optionsPtr);
+       var options = string.IsNullOrWhiteSpace(json)
+    ? new RenderOptions()
+    : Json.DeserializeRenderOptions(json);
+        var png = Renderer.RenderPng(zpl, options);
 
         *length = png.Length;
 

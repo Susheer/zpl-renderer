@@ -22,6 +22,6 @@ public static class Parser
 
     public static string Analyze(string zpl) {
         var result = Parse(zpl);
-        return JsonSerializer.Serialize( result, JsonContext.Default.AnalyzeInfo);
+        return Json.Serialize(result);
     }
 }

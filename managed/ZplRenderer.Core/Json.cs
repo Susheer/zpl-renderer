@@ -1,17 +1,22 @@
 using System.Text.Json;
+using BinaryKits.Zpl.Viewer.Models;
 
 namespace ZplRenderer.Core;
 
 internal static class Json
 {
-    internal static readonly JsonSerializerOptions Options = new()
-        {
-            WriteIndented = false,
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-
-    internal static string Serialize(object value)
+    internal static string Serialize(AnalyzeInfo value)
     {
-        return JsonSerializer.Serialize(value, Options);
+        return JsonSerializer.Serialize(
+            value,
+            JsonContext.Default.AnalyzeInfo);
+    }
+
+    internal static RenderOptions DeserializeRenderOptions(string json)
+    {
+        return JsonSerializer.Deserialize(
+                   json,
+                   JsonContext.Default.RenderOptions)
+               ?? new RenderOptions();
     }
 }

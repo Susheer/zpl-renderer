@@ -6,14 +6,40 @@ namespace
 {
     ZplRenderer renderer;
 
+    std::string ObjectToJson(
+        Napi::Env env,
+        const Napi::Object& object)
+    {
+        Napi::Object global = env.Global();
+
+        Napi::Object json =
+            global.Get("JSON").As<Napi::Object>();
+
+        Napi::Function stringify =
+            json.Get("stringify").As<Napi::Function>();
+
+        Napi::Value value =
+            stringify.Call(json, { object });
+
+        return value.As<Napi::String>().Utf8Value();
+    }
+
     Napi::Value JsInitialize(const Napi::CallbackInfo& info)
     {
-    Napi::Env env = info.Env();
-        try{
+        Napi::Env env = info.Env();
 
-        return Napi::Boolean::New(env, renderer.Initialize());
-        }catch(const std::exception& ex){
-            Napi::Error::New(env, ex.what()).ThrowAsJavaScriptException();
+        try
+        {
+            return Napi::Boolean::New(
+                env,
+                renderer.Initialize());
+        }
+        catch (const std::exception& ex)
+        {
+            Napi::Error::New(
+                env,
+                ex.what()).ThrowAsJavaScriptException();
+
             return env.Null();
         }
     }
@@ -30,7 +56,10 @@ namespace
         }
         catch (const std::exception& ex)
         {
-            Napi::Error::New(env, ex.what()).ThrowAsJavaScriptException();
+            Napi::Error::New(
+                env,
+                ex.what()).ThrowAsJavaScriptException();
+
             return env.Null();
         }
     }
@@ -39,7 +68,8 @@ namespace
     {
         Napi::Env env = info.Env();
 
-        if (info.Length() != 1 || !info[0].IsString())
+        if (info.Length() < 1 ||
+            !info[0].IsString())
         {
             Napi::TypeError::New(
                 env,
@@ -51,7 +81,8 @@ namespace
 
         try
         {
-            std::string zpl = info[0].As<Napi::String>();
+            std::string zpl =
+                info[0].As<Napi::String>();
 
             return Napi::String::New(
                 env,
@@ -59,7 +90,10 @@ namespace
         }
         catch (const std::exception& ex)
         {
-            Napi::Error::New(env, ex.what()).ThrowAsJavaScriptException();
+            Napi::Error::New(
+                env,
+                ex.what()).ThrowAsJavaScriptException();
+
             return env.Null();
         }
     }
@@ -68,7 +102,8 @@ namespace
     {
         Napi::Env env = info.Env();
 
-        if (info.Length() != 1 || !info[0].IsString())
+        if (info.Length() < 1 ||
+            !info[0].IsString())
         {
             Napi::TypeError::New(
                 env,
@@ -80,10 +115,32 @@ namespace
 
         try
         {
-            std::string zpl = info[0].As<Napi::String>();
+            std::string zpl =
+                info[0].As<Napi::String>();
+
+            std::string optionsJson = "{}";
+
+            if (info.Length() >= 2)
+            {
+                if (!info[1].IsObject())
+                {
+                    Napi::TypeError::New(
+                        env,
+                        "Second argument must be an object.")
+                        .ThrowAsJavaScriptException();
+
+                    return env.Null();
+                }
+
+                optionsJson = ObjectToJson(
+                    env,
+                    info[1].As<Napi::Object>());
+            }
 
             std::vector<uint8_t> png =
-                renderer.RenderPng(zpl);
+                renderer.RenderPng(
+                    zpl,
+                    optionsJson);
 
             return Napi::Buffer<uint8_t>::Copy(
                 env,
@@ -92,7 +149,10 @@ namespace
         }
         catch (const std::exception& ex)
         {
-            Napi::Error::New(env, ex.what()).ThrowAsJavaScriptException();
+            Napi::Error::New(
+                env,
+                ex.what()).ThrowAsJavaScriptException();
+
             return env.Null();
         }
     }
@@ -104,19 +164,27 @@ Napi::Object Init(
 {
     exports.Set(
         "initialize",
-        Napi::Function::New(env, JsInitialize));
+        Napi::Function::New(
+            env,
+            JsInitialize));
 
     exports.Set(
         "getVersion",
-        Napi::Function::New(env, JsGetVersion));
+        Napi::Function::New(
+            env,
+            JsGetVersion));
 
     exports.Set(
         "parse",
-        Napi::Function::New(env, JsParse));
+        Napi::Function::New(
+            env,
+            JsParse));
 
     exports.Set(
         "renderPng",
-        Napi::Function::New(env, JsRenderPng));
+        Napi::Function::New(
+            env,
+            JsRenderPng));
 
     return exports;
 }

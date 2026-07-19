@@ -18,7 +18,7 @@ public:
 
     std::string Parse(const std::string& zpl);
 
-    std::vector<uint8_t> RenderPng(const std::string& zpl);
+    std::vector<uint8_t> RenderPng(const std::string& zpl, const std::string& optionsJson);
 
 private:
 #ifdef _WIN32
@@ -28,7 +28,7 @@ private:
     typedef int (*InitializeFn)();
     typedef void* (*GetVersionFn)();
     typedef void* (*ParseFn)(const char*);
-    typedef void* (*RenderPngFn)(const char*, int*);
+    typedef void* (*RenderPngFn)(const char*, const char*, int*);
     typedef void (*FreeMemoryFn)(void*);
 
     InitializeFn _initialize = nullptr;

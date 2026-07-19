@@ -118,17 +118,23 @@ std::string ZplRenderer::Parse(const std::string& zpl)
     return json;
 }
 
-std::vector<uint8_t> ZplRenderer::RenderPng(const std::string& zpl)
+std::vector<uint8_t> ZplRenderer::RenderPng(
+    const std::string& zpl,
+    const std::string& optionsJson)
 {
     if (!Load())
     {
-        throw std::runtime_error("Unable to load ZplRenderer.Core.dll");
+        throw std::runtime_error(
+            "Unable to load ZplRenderer.Core.dll");
     }
 
     int length = 0;
 
     uint8_t* data = static_cast<uint8_t*>(
-        _renderPng(zpl.c_str(), &length));
+        _renderPng(
+            zpl.c_str(),
+            optionsJson.c_str(),
+            &length));
 
     std::vector<uint8_t> png;
 
