@@ -14,10 +14,20 @@
       ],
       "copies": [
         {
-          "files": [ "<(PRODUCT_DIR)/<(module_name).node" ],
+          "files": [
+            "<(PRODUCT_DIR)/<(module_name).node"
+          ],
+          "destination": "<(module_path)"
+        },
+        {
+          "files": [
+            'managed/ZplRenderer.Core/bin/Release/net8.0/win-x64/publish/ZplRenderer.Core.dll',
+            'managed/ZplRenderer.Core/bin/Release/net8.0/win-x64/publish/libSkiaSharp.dll',
+            'managed/ZplRenderer.Core/bin/Release/net8.0/win-x64/publish/libHarfBuzzSharp.dll'
+          ],
           "destination": "<(module_path)"
         }
-      ]
+    ]
     },
     {
       'target_name': '<(module_name)',
@@ -41,14 +51,6 @@
       'msvs_settings': {
         'VCCLCompilerTool': { 'ExceptionHandling': 1 },
       },
-    'copies': [
-    {
-      'files': [
-        'managed/ZplRenderer.Core/bin/Release/net8.0/win-x64/publish/ZplRenderer.Core.dll'
-      ],
-      'destination': '<(module_path)'
-    }
-  ]
     }
   ]
 }

@@ -25,12 +25,40 @@ bool ZplRenderer::Load()
         return true;
     }
 
-    _library = LoadLibraryA("ZplRenderer.Core.dll");
+    _library = LoadLibraryA("lib\\ZplRenderer.Core.dll");
 
-    if (_library == nullptr)
+if (_library == nullptr)
+{
+    DWORD error = GetLastError();
+
+    LPSTR message = nullptr;
+
+    FormatMessageA(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER |
+        FORMAT_MESSAGE_FROM_SYSTEM |
+        FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        error,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPSTR)&message,
+        0,
+        NULL);
+
+    std::string text =
+        "Unable to load ZplRenderer.Core.dll.\n";
+
+    text += "Win32 Error: ";
+    text += std::to_string(error);
+
+    if (message != nullptr)
     {
-        return false;
+        text += "\n";
+        text += message;
+        LocalFree(message);
     }
+
+    throw std::runtime_error(text);
+}
 
     _initialize = Resolve<InitializeFn>("Initialize");
     _getVersion = Resolve<GetVersionFn>("GetVersion");

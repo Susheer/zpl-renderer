@@ -8,11 +8,14 @@ namespace
 
     Napi::Value JsInitialize(const Napi::CallbackInfo& info)
     {
-        Napi::Env env = info.Env();
+    Napi::Env env = info.Env();
+        try{
 
-        return Napi::Boolean::New(
-            env,
-            renderer.Initialize());
+        return Napi::Boolean::New(env, renderer.Initialize());
+        }catch(const std::exception& ex){
+            Napi::Error::New(env, ex.what()).ThrowAsJavaScriptException();
+            return env.Null();
+        }
     }
 
     Napi::Value JsGetVersion(const Napi::CallbackInfo& info)
