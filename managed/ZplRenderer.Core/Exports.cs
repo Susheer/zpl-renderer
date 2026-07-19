@@ -14,7 +14,7 @@ public static class Exports
     [UnmanagedCallersOnly(EntryPoint = "GetVersion")]
     public static IntPtr GetVersion()
     {
-        return Memory.AllocString("0.2.0");
+        return Memory.AllocString("0.3.0");
     }
 
     [UnmanagedCallersOnly(EntryPoint = "Parse")]
