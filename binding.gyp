@@ -40,7 +40,15 @@
       },
       'msvs_settings': {
         'VCCLCompilerTool': { 'ExceptionHandling': 1 },
-      }
+      },
+    'copies': [
+    {
+      'files': [
+        'managed/ZplRenderer.Core/bin/Release/net8.0/win-x64/publish/ZplRenderer.Core.dll'
+      ],
+      'destination': '<(module_path)'
+    }
+  ]
     }
   ]
 }

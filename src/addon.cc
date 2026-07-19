@@ -6,7 +6,7 @@ namespace
 {
     ZplRenderer renderer;
 
-    Napi::Value Initialize(const Napi::CallbackInfo& info)
+    Napi::Value JsInitialize(const Napi::CallbackInfo& info)
     {
         Napi::Env env = info.Env();
 
@@ -15,7 +15,7 @@ namespace
             renderer.Initialize());
     }
 
-    Napi::Value GetVersion(const Napi::CallbackInfo& info)
+    Napi::Value JsGetVersion(const Napi::CallbackInfo& info)
     {
         Napi::Env env = info.Env();
 
@@ -32,7 +32,7 @@ namespace
         }
     }
 
-    Napi::Value Parse(const Napi::CallbackInfo& info)
+    Napi::Value JsParse(const Napi::CallbackInfo& info)
     {
         Napi::Env env = info.Env();
 
@@ -61,7 +61,7 @@ namespace
         }
     }
 
-    Napi::Value RenderPng(const Napi::CallbackInfo& info)
+    Napi::Value JsRenderPng(const Napi::CallbackInfo& info)
     {
         Napi::Env env = info.Env();
 
@@ -101,19 +101,19 @@ Napi::Object Init(
 {
     exports.Set(
         "initialize",
-        Napi::Function::New(env, Initialize));
+        Napi::Function::New(env, JsInitialize));
 
     exports.Set(
         "getVersion",
-        Napi::Function::New(env, GetVersion));
+        Napi::Function::New(env, JsGetVersion));
 
     exports.Set(
         "parse",
-        Napi::Function::New(env, Parse));
+        Napi::Function::New(env, JsParse));
 
     exports.Set(
         "renderPng",
-        Napi::Function::New(env, RenderPng));
+        Napi::Function::New(env, JsRenderPng));
 
     return exports;
 }
