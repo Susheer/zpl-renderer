@@ -24,8 +24,8 @@ bool ZplRenderer::Load()
     {
         return true;
     }
-
-    _library = LoadLibraryA("lib\\ZplRenderer.Core.dll");
+     SetDllDirectoryA("lib");
+    _library = LoadLibraryA("ZplRenderer.Core.dll");
 
 if (_library == nullptr)
 {

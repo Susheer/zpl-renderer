@@ -20,16 +20,8 @@ public static class Parser
         return analyzer.Analyze(zpl);
     }
 
-    public static string Analyze(string zpl)
-    {
+    public static string Analyze(string zpl) {
         var result = Parse(zpl);
-
-        return JsonSerializer.Serialize(
-            result,
-            new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-            });
+        return JsonSerializer.Serialize( result, JsonContext.Default.AnalyzeInfo);
     }
 }
