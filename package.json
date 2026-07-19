@@ -11,9 +11,10 @@
   },
 
   "scripts": {
-    "build:core": "dotnet build managed/ZplRenderer.Core/ZplRenderer.Core.csproj",
-    "publish:core": "dotnet publish managed/ZplRenderer.Core/ZplRenderer.Core.csproj -c Release",
+    "build:core": "dotnet publish managed/ZplRenderer.Core/ZplRenderer.Core.csproj -c Release",
+    "build:complete": "npm run clean && npm run build:core && npm run rebuild",
     "rebuild": "node-gyp rebuild",
+    "clean":"node tools/clean.js",
     "test": "node --test test/"
   },
 
