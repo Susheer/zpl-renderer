@@ -41,3 +41,10 @@ Thank you for considering contributing!
         npm run rebuild
 
        ```
+ # Update addon version
+    - update it from the Package.json
+    - Do following, this will update the addon or npm package version
+     ```
+      npm run rebuild
+     ```
+    - This will only update npm package version not the underlying dll, to update that look into how to update that given above under the ~How to Change Version~, post that do this.
